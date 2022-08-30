@@ -10,7 +10,7 @@ function ActorCard({ image, name, gender, country, birthday, deathday }) {
       <h1>
         {name} {gender ? `(${gender})` : null}
       </h1>
-      <p>{country ? `Comes from ${country}` : 'No country known'}</p>
+      <p>{country ? `Comes from ${country.name}` : 'No country known'}</p>
       {birthday ? <p>Born {birthday}</p> : null}
       <p className="deathday">{deathday ? `Died ${deathday}` : 'Alive'}</p>
     </StyledActorCard>
