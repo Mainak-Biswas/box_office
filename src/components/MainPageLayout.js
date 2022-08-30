@@ -10,6 +10,7 @@ function MainPageLayout({ children }) {
         subtitle="Are you Looking for a Movie or an Actor"
       />
       <Navs />
+
       {children}
     </div>
   );

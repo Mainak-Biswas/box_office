@@ -10,8 +10,8 @@ function Navs() {
   return (
     <div>
       <ul>
-        {LINKS.map(item => (
-          <li>
+        {LINKS.map((item, index) => (
+          <li key={index}>
             <Link to={item.to}>{item.text}</Link>
           </li>
         ))}
