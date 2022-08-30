@@ -4,10 +4,12 @@ function showsReducer(currState, action) {
   switch (action.type) {
     case 'ADD': {
       return [...currState, action.showId];
+      // If the show is not starred then add the id
     }
 
     case 'REMOVE': {
       return currState.filter(showId => showId !== action.showId);
+      // If the show is starred then remove the id
     }
 
     default:
@@ -18,9 +20,11 @@ function showsReducer(currState, action) {
 function usePersistedReducer(reducer, initialState, key) {
   const [state, dispatch] = useReducer(reducer, initialState, initial => {
     // Initial Sate initializer
-    const persisted = localStorage.getItem(key); // To get the item from the local storage
+    const persisted = localStorage.getItem(key);
+    // To get the item from the local storage
 
     return persisted ? JSON.parse(persisted) : initial;
+    // Returns the item fetched from the local starage to the hook
   });
 
   useEffect(() => {
@@ -31,6 +35,7 @@ function usePersistedReducer(reducer, initialState, key) {
   return [state, dispatch];
 }
 
+// use Shows function call the usePersistedReducer hook and returns the respective data from the local storage
 export function useShows(key = 'shows') {
   return usePersistedReducer(showsReducer, [], key);
 }
