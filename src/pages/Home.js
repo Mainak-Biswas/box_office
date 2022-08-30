@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
+import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
 
 function Home() {
@@ -34,13 +36,11 @@ function Home() {
     if (results && results.length > 0) {
       return (
         <div>
-          {results[0].show
-            ? results.map(item => (
-                <div key={item.show.id}>{item.show.name}</div>
-              ))
-            : results.map(item => (
-                <div key={item.person.id}>{item.person.name}</div>
-              ))}
+          {results[0].show ? (
+            <ShowGrid data={results} />
+          ) : (
+            <ActorGrid data={results} />
+          )}
         </div>
       );
     }
@@ -55,8 +55,6 @@ function Home() {
       setSearchPlaceHolder('Search for Actors');
     }
   };
-
-  console.log(searchOption);
 
   return (
     <MainPageLayout>
