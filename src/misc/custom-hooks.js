@@ -35,7 +35,8 @@ function usePersistedReducer(reducer, initialState, key) {
   return [state, dispatch];
 }
 
-// use Shows function call the usePersistedReducer hook and returns the respective data from the local storage
+// use Shows function call the usePersistedReducer hook
+// and returns data from the local storage
 export function useShows(key = 'shows') {
   return usePersistedReducer(showsReducer, [], key);
 }
