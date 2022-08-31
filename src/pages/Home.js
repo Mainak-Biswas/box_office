@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import CustomRadio from '../components/CustomRadio';
 import MainPageLayout from '../components/MainPageLayout';
@@ -19,9 +19,12 @@ function Home() {
   const [searchPlaceHolder, setSearchPlaceHolder] =
     useState('Search for Shows');
 
-  const onInputChange = ev => {
-    setInput(ev.target.value);
-  };
+  const onInputChange = useCallback(
+    ev => {
+      setInput(ev.target.value);
+    },
+    [setInput]
+  );
 
   const onSearch = () => {
     // https://api.tvmaze.com/search/shows?q=girls
@@ -54,14 +57,15 @@ function Home() {
     return null;
   };
 
-  const onRadioChange = ev => {
+  const onRadioChange = useCallback(ev => {
     setSearchOption(ev.target.value);
     if (ev.target.value === 'shows') {
       setSearchPlaceHolder('Search for Shows');
     } else {
       setSearchPlaceHolder('Search for Actors');
     }
-  };
+  }, []);
+  // useCallback is used to stop re rendering of same function
 
   return (
     <MainPageLayout>
